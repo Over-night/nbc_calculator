@@ -1,7 +1,5 @@
 package v2;
 
-import utils.InputtedModification;
-
 import java.util.ArrayList;
 
 public class Calculator {
@@ -11,7 +9,7 @@ public class Calculator {
         results = new ArrayList<>();
     }
 
-    public Float calculate(InputtedModification data) {
+    public Float calculate(InputtedModificationV2 data) {
         Float result = switch (data.operator) {
             case '+' -> data.firstOperand + data.secondOperand;
             case '-' -> data.firstOperand - data.secondOperand;

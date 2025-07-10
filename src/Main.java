@@ -1,4 +1,4 @@
-import utils.InputtedModification;
+import v2.InputtedModificationV2;
 import v2.Calculator;
 import v2.InputManager;
 
@@ -15,7 +15,7 @@ public class Main {
 
             switch (menu) {
                     case 1:
-                        InputtedModification modification = inputManager.inputModification();
+                        InputtedModificationV2 modification = inputManager.inputModification();
                         System.out.printf("%f %c %f = %f\n\n",
                                 modification.firstOperand,
                                 modification.operator,

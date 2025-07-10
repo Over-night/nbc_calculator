@@ -1,7 +1,5 @@
 package v2;
 
-import utils.InputtedModification;
-
 import java.util.Scanner;
 
 public class InputManager {
@@ -27,7 +25,7 @@ public class InputManager {
         }
     }
 
-    public InputtedModification inputModification() {
+    public InputtedModificationV2 inputModification() {
         float firstOperand = 0;
         float secondOperand = 0;
         char operator = ' ';
@@ -57,7 +55,7 @@ public class InputManager {
             }
         }
 
-        return new InputtedModification(firstOperand, secondOperand, operator);
+        return new InputtedModificationV2(firstOperand, secondOperand, operator);
     }
 
     public int inputMenu() {
