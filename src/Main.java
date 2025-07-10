@@ -1,5 +1,4 @@
-import utils.BooleanWithMessage;
-import utils.ComputationalData;
+import utils.InputtedModification;
 import v2.Calculator;
 import v2.InputManager;
 
@@ -11,46 +10,49 @@ public class Main {
         InputManager inputManager = new InputManager();
         Calculator calculator = new Calculator();
 
-        boolean trigger = true;
+        while (true) {
+            int menu = inputManager.inputMenu();
 
-        do {
-            BooleanWithMessage menu = inputManager.inputMenu();
-
-            if (!menu.isValid) {
-                System.out.println("Program Terminated");
-                trigger = false;
-            }
-
-            else {
-                switch (menu.message) {
-                    case "inputData":
-                        ComputationalData data = inputManager.inputData();
-                        System.out.println("Calculate result: " + calculator.calculate(data));
+            switch (menu) {
+                    case 1:
+                        InputtedModification modification = inputManager.inputModification();
+                        System.out.printf("%f %c %f = %f\n\n",
+                                modification.firstOperand,
+                                modification.operator,
+                                modification.secondOperand,
+                                calculator.calculate(modification));
+                        break;
+                    case 2:
+                        System.out.println("All result: " + calculator.getAllResults());
                         System.out.println();
                         break;
-                    case "getResults":
-                        System.out.println("All result: " + calculator.getResults());
-                        System.out.println();
+                    case 3:
+                        try {
+                            System.out.printf("Recent result: %f\n\n", calculator.getLastResult());
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.printf("Error: %s\n\n", e.getMessage());
+                        }
                         break;
-                    case "getResult":
-                        System.out.println("Recent result: " + calculator.getResult());
-                        System.out.println();
-                        break;
-                    case "deleteResults":
-                        calculator.deleteResults();
+                    case 4:
+                        calculator.deleteAllResults();
                         System.out.println("All data is deleted\n");
                         break;
-                    case "deleteResult":
-                        calculator.deleteResult();
-                        System.out.println("First data is deleted\n");
-                        break;
-                    default:
-                        System.out.println("Error occurred. Program will be terminated");
-                        trigger = false;
-                }
-            }
-        } while (trigger);
+                    case 5:
+                        try {
+                            calculator.deleteFirstResult();
+                            System.out.println("First data is deleted\n");
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.printf("Error: %s\n\n", e.getMessage());
+                        }
 
-        System.out.println("Program Terminated");
+                        break;
+                    case 0:
+                        System.out.println("Program Terminated");
+                        System.exit(0);
+                    default:
+                        System.out.println("Error occurred. Please try again.");
+                }
+
+        }
     }
 }

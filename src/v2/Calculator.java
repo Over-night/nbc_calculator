@@ -1,6 +1,6 @@
 package v2;
 
-import utils.ComputationalData;
+import utils.InputtedModification;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class Calculator {
         results = new ArrayList<>();
     }
 
-    public Float calculate(ComputationalData data) {
+    public Float calculate(InputtedModification data) {
         Float result = switch (data.operator) {
             case '+' -> data.firstOperand + data.secondOperand;
             case '-' -> data.firstOperand - data.secondOperand;
@@ -25,25 +25,29 @@ public class Calculator {
         return result;
     }
 
-    public ArrayList<Float> getResults() {
+    public ArrayList<Float> getAllResults() {
         return results;
     }
 
-    public float getResult() {
-        return results.get(results.size() - 1);
+    public float getLastResult() {
+        try {
+            return results.get(results.size() - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("List is empty.");
+        }
     }
 
-    public void deleteResult() {
+    public void deleteFirstResult() {
         try {
             results.remove(0);
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Error : List is empty.");
+            throw new IndexOutOfBoundsException("List is empty.");
         }
 
         System.out.println("Deleted first result");
     }
 
-    public void deleteResults() {
+    public void deleteAllResults() {
         results.clear();
 
         System.out.println("Deleted all of results");

@@ -1,7 +1,6 @@
 package v2;
 
-import utils.BooleanWithMessage;
-import utils.ComputationalData;
+import utils.InputtedModification;
 
 import java.util.Scanner;
 
@@ -12,32 +11,28 @@ public class InputManager {
         sc = new Scanner(System.in);
     }
 
-    private BooleanWithMessage checkValid(float first, float second, String inputtedOperator) {
+    private void checkValid(float first, float second, String inputtedOperator) {
         if (inputtedOperator.length() != 1) {
-            return new BooleanWithMessage(false, "Error : Invalid operator.");
+            throw new IllegalArgumentException("Invalid operator.");
         }
 
         char operator = inputtedOperator.charAt(0);
 
         if (!(operator == '+' || operator == '-' || operator == '*' || operator == '/')) {
-            return new BooleanWithMessage(false, "Error: Invalid operator.");
+            throw new IllegalArgumentException("Invalid operator.");
         }
 
         if (second == 0f && operator == '/') {
-            return new BooleanWithMessage(false, "Error: Cannot divide by zero.");
+            throw new ArithmeticException("Cannot divide by zero.");
         }
-
-        return new BooleanWithMessage(true, "");
     }
 
-    public ComputationalData inputData() {
-        boolean valid = false;
-
+    public InputtedModification inputModification() {
         float firstOperand = 0;
         float secondOperand = 0;
-        char operator = 0;
+        char operator = ' ';
 
-        do {
+        while (true){
             try {
                 System.out.print("Enter first operand: ");
                 firstOperand = sc.nextFloat();
@@ -46,25 +41,26 @@ public class InputManager {
                 System.out.print("Enter operator: ");
                 String inputtedOperator = sc.next();
 
-                BooleanWithMessage dataValid = checkValid(firstOperand, secondOperand, inputtedOperator);
-                if (dataValid.isValid) {
+                try {
+                    checkValid(firstOperand, secondOperand, inputtedOperator);
                     operator = inputtedOperator.charAt(0);
-                    valid = true;
-                } else {
-                    System.out.println(dataValid.message);
                 }
+                catch (Exception e) {
+                    System.out.println("Error: " + e.getMessage());
+                    continue;
+                }
+
+                break;
             } catch (Exception e) {
-                System.out.println("Error: Entered data's type is invalid");
+                System.out.println("Error: " + e.getMessage());
                 sc.nextLine();
             }
-        } while (!valid);
+        }
 
-        return new ComputationalData(firstOperand, secondOperand, operator);
+        return new InputtedModification(firstOperand, secondOperand, operator);
     }
 
-    public BooleanWithMessage inputMenu() {
-        boolean valid = false;
-        BooleanWithMessage result = new BooleanWithMessage(true, "Error occurred");
+    public int inputMenu() {
         String inputtedData;
 
         System.out.println("< Menu Manager >");
@@ -75,7 +71,7 @@ public class InputManager {
         System.out.println("5. Delete first Data");
         System.out.println("0. Exit");
 
-        do {
+        while (true) {
             System.out.print("Select: ");
             inputtedData = sc.next();
 
@@ -83,44 +79,31 @@ public class InputManager {
                 case "1":
                 case "Calculate":
                 case "1. Calculate":
-                    result = new BooleanWithMessage(true, "inputData");
-                    valid = true;
-                    break;
+                    return 1;
                 case "2":
                 case "Show All Data":
                 case "2. Show All Data":
-                    result = new BooleanWithMessage(true, "getResults");
-                    valid = true;
-                    break;
+                    return 2;
                 case "3":
                 case "Show Recent Data":
                 case "3. Show Recent Data":
-                    result = new BooleanWithMessage(true, "getResult");
-                    valid = true;
-                    break;
+                    return 3;
                 case "4":
                 case "Delete All Data":
                 case "4. Delete All Data":
-                    result = new BooleanWithMessage(true, "deleteResults");
-                    valid = true;
-                    break;
+                    return 4;
                 case "5":
                 case "Delete first Data":
                 case "5. Delete first Data":
-                    result = new BooleanWithMessage(true, "deleteResult");
-                    valid = true;
-                    break;
+                    return 5;
                 case "0":
                 case "Exit":
+                case "exit":
                 case "0. Exit":
-                    result = new BooleanWithMessage(false, "exit");
-                    valid = true;
-                    break;
+                    return 0;
                 default:
-                    System.out.println("Error : Invalid menu type. Try again.");
+                    System.out.println("Error : Invalid menu type. Please try again.");
             }
-        } while (!valid);
-
-        return result;
+        }
     }
 }
