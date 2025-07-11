@@ -1,15 +1,18 @@
 package v2;
 
+import interfaces.InputManager;
+import utils.InputtedModification;
+
 import java.util.Scanner;
 
-public class InputManager {
+public class InputManagerV2 implements InputManager {
     private final Scanner sc;
 
-    public InputManager() {
+    public InputManagerV2() {
         sc = new Scanner(System.in);
     }
 
-    private void checkValid(float first, float second, String inputtedOperator) {
+    private void checkValid(double first, double second, String inputtedOperator) {
         if (inputtedOperator.length() != 1) {
             throw new IllegalArgumentException("Invalid operator.");
         }
@@ -25,17 +28,17 @@ public class InputManager {
         }
     }
 
-    public InputtedModificationV2 inputModification() {
-        float firstOperand = 0;
-        float secondOperand = 0;
+    public InputtedModification inputModification() {
+        double firstOperand = 0;
+        double secondOperand = 0;
         char operator = ' ';
 
         while (true){
             try {
                 System.out.print("Enter first operand: ");
-                firstOperand = sc.nextFloat();
+                firstOperand = sc.nextDouble();
                 System.out.print("Enter second operand: ");
-                secondOperand = sc.nextFloat();
+                secondOperand = sc.nextDouble();
                 System.out.print("Enter operator: ");
                 String inputtedOperator = sc.next();
 
@@ -55,7 +58,7 @@ public class InputManager {
             }
         }
 
-        return new InputtedModificationV2(firstOperand, secondOperand, operator);
+        return new InputtedModification(firstOperand, secondOperand, operator);
     }
 
     public int inputMenu() {

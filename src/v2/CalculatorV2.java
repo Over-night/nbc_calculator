@@ -1,16 +1,19 @@
 package v2;
 
+import interfaces.Calculator;
+import utils.InputtedModification;
+
 import java.util.ArrayList;
 
-public class Calculator {
-    private final ArrayList<Float> results;
+public class CalculatorV2 implements Calculator<Double>  {
+    private final ArrayList<Double> results;
 
-    public Calculator() {
+    public CalculatorV2() {
         results = new ArrayList<>();
     }
 
-    public Float calculate(InputtedModificationV2 data) {
-        Float result = switch (data.operator) {
+    public Double calculate(InputtedModification data) {
+        double result = switch (data.operator) {
             case '+' -> data.firstOperand + data.secondOperand;
             case '-' -> data.firstOperand - data.secondOperand;
             case '*' -> data.firstOperand * data.secondOperand;
@@ -23,11 +26,11 @@ public class Calculator {
         return result;
     }
 
-    public ArrayList<Float> getAllResults() {
+    public ArrayList<Double> getAllResults() {
         return results;
     }
 
-    public float getLastResult() {
+    public Double getLastResult() {
         try {
             return results.get(results.size() - 1);
         } catch (IndexOutOfBoundsException e) {

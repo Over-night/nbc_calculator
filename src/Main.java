@@ -1,21 +1,23 @@
-import v2.InputtedModificationV2;
-import v2.Calculator;
-import v2.InputManager;
+import interfaces.Calculator;
+import interfaces.InputManager;
+import utils.InputtedModification;
+import v2.CalculatorV2;
+import v2.InputManagerV2;
 
 //TIP 코드를 <b>실행</b>하려면 <shortcut actionId="Run"/>을(를) 누르거나
 // 에디터 여백에 있는 <icon src="AllIcons.Actions.Execute"/> 아이콘을 클릭하세요.
 public class Main {
 
     public static void main(String[] args) {
-        InputManager inputManager = new InputManager();
-        Calculator calculator = new Calculator();
+        InputManager inputManager = new InputManagerV2();
+        Calculator<Double> calculator = new CalculatorV2();
 
         while (true) {
             int menu = inputManager.inputMenu();
 
             switch (menu) {
                     case 1:
-                        InputtedModificationV2 modification = inputManager.inputModification();
+                        InputtedModification modification = inputManager.inputModification();
                         System.out.printf("%f %c %f = %f\n\n",
                                 modification.firstOperand,
                                 modification.operator,
