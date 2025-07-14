@@ -2,6 +2,7 @@ package v3;
 
 import interfaces.InputManager;
 import utils.InputtedModification;
+import utils.Menu;
 import utils.Operator;
 
 import java.util.Scanner;
@@ -67,15 +68,17 @@ public class InputManagerV3 implements InputManager<Double> {
         return new InputtedModification<Double>(firstOperand, secondOperand, operator);
     }
 
-    public int inputMenu() {
+    public Menu inputMenu() {
         String inputtedData;
 
         System.out.println("< Menu Manager >");
         System.out.println("1. Calculate");
         System.out.println("2. Show All Data");
-        System.out.println("3. Show Recent Data");
-        System.out.println("4. Delete All Data");
-        System.out.println("5. Delete first Data");
+        System.out.println("3. Show First Data");
+        System.out.println("4. Show Recent Data");
+        System.out.println("5. Delete All Data");
+        System.out.println("6. Delete First Data");
+        System.out.println("7. Delete Recent Data");
         System.out.println("0. Exit");
 
         while (true) {
@@ -86,28 +89,36 @@ public class InputManagerV3 implements InputManager<Double> {
                 case "1":
                 case "Calculate":
                 case "1. Calculate":
-                    return 1;
+                    return Menu.CALCULATE;
                 case "2":
                 case "Show All Data":
                 case "2. Show All Data":
-                    return 2;
+                    return Menu.SHOW_ALL;
                 case "3":
-                case "Show Recent Data":
-                case "3. Show Recent Data":
-                    return 3;
+                case "Show First Data":
+                case "3. Show First Data":
+                    return Menu.SHOW_FIRST;
                 case "4":
-                case "Delete All Data":
-                case "4. Delete All Data":
-                    return 4;
+                case "Show Recent Data":
+                case "4. Show Recent Data":
+                    return Menu.SHOW_LAST;
                 case "5":
-                case "Delete first Data":
-                case "5. Delete first Data":
-                    return 5;
+                case "Delete All Data":
+                case "5. Delete All Data":
+                    return Menu.DELETE_ALL;
+                case "6":
+                case "Delete First Data":
+                case "6. Delete First Data":
+                    return Menu.DELETE_FIRST;
+                case "7":
+                case "Delete Recent Data":
+                case "7. Delete Recent Data":
+                    return Menu.DELETE_LAST;
                 case "0":
                 case "Exit":
                 case "exit":
                 case "0. Exit":
-                    return 0;
+                    return Menu.EXIT;
                 default:
                     System.out.println("Error : Invalid menu type. Please try again.");
             }
