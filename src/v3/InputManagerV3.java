@@ -15,7 +15,9 @@ public class InputManagerV3 implements InputManager<Double> {
         sc = new Scanner(System.in);
     }
 
+    // 데이터 유효성 검사
     private Operator checkValid(double second, String inputtedOperator) {
+        // 연산자 유효성 검사
         if (inputtedOperator.length() != 1) {
             throw new IllegalArgumentException("Invalid operator.");
         }
@@ -30,13 +32,15 @@ public class InputManagerV3 implements InputManager<Double> {
 
         if (operator == null) throw new IllegalArgumentException("Invalid operator.");
 
-        if (second == 0f && operator == Operator.DIVIDE) {
+        // div 0 확인
+        if (second == 0f && operator.equals(Operator.DIVIDE)) {
             throw new ArithmeticException("Cannot divide by zero.");
         }
 
         return operator;
     }
 
+    // 수식 입력 함수
     @Override
     public InputtedModification<Double> inputModification() {
         double firstOperand = 0f;
@@ -56,12 +60,14 @@ public class InputManagerV3 implements InputManager<Double> {
                     operator = checkValid(secondOperand, inputtedOperator);
                 }
                 catch (Exception e) {
+                    // 유효하지 않은 연산자 입력 시
                     System.out.println("Error: " + e.getMessage());
                     continue;
                 }
 
                 break;
             } catch (InputMismatchException e) {
+                // 유효하지 않은 피연산자 입력 시
                 System.out.println("Error: Invalid input value (" + e.getMessage() + ")");
                 sc.nextLine();
             }
@@ -70,6 +76,7 @@ public class InputManagerV3 implements InputManager<Double> {
         return new InputtedModification<Double>(firstOperand, secondOperand, operator);
     }
 
+    // 필터링 조건 입력
     @Override
     public Double inputTarget() {
         Double target = null;
@@ -88,6 +95,7 @@ public class InputManagerV3 implements InputManager<Double> {
         return target;
     }
 
+    // 메뉴 입력
     public Menu inputMenu() {
         String command;
 
@@ -105,7 +113,7 @@ public class InputManagerV3 implements InputManager<Double> {
 
         while (true) {
             System.out.print("Select: ");
-            command = sc.next();
+            command = sc.nextLine();
 
             switch (command) {
                 case "1":

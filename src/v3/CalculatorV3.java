@@ -13,6 +13,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         results = new ArrayList<>();
     }
 
+    // 계산 함수
     @Override
     public Result calculate(InputtedModification<Double> modification) {
         double calculate_result = switch (modification.operator()) {
@@ -23,6 +24,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
             default -> throw new IllegalArgumentException("Error : Invalid modification.");
         };
 
+        // 반환값 : 수식(String), 결과값(Double)
         Result result = new Result(
                 String.format("%f %c %f = %f",
                         modification.firstOperand(),
@@ -37,6 +39,8 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         return result;
     }
 
+
+    // 전체 결과 조회
     @Override
     public ArrayList<Result> getAllResults() {
         if (results.isEmpty()) throw new IllegalStateException("List is empty.");
@@ -44,6 +48,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         return results;
     }
 
+    // 첫 결과 조회
     @Override
     public Result getFirstResult() {
         try {
@@ -53,6 +58,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         }
     }
 
+    // 최근 결과 조회
     @Override
     public Result getLastResult() {
         try {
@@ -62,6 +68,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         }
     }
 
+    // 첫 결과 삭제
     @Override
     public void deleteFirstResult() {
         try {
@@ -73,6 +80,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         System.out.println("Deleted first result");
     }
 
+    // 최근 결과 삭제
     @Override
     public void deleteLastResult() {
         try {
@@ -84,6 +92,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         System.out.println("Deleted last result");
     }
 
+    // 전체 결과 삭제
     @Override
     public void deleteAllResults() {
         if(results.isEmpty()) throw new IllegalStateException("List is already empty.");
@@ -92,6 +101,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         System.out.println("Deleted all of results");
     }
 
+    // 입력값 보다 큰 결과로 필터링
     @Override
     public void searchBiggerThanTarget(Double target) {
         if(results.isEmpty()) throw new IllegalStateException("List is empty.");
@@ -103,6 +113,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         System.out.println();
     }
 
+    // 입력값 보다 작은 결과로 필터링
     @Override
     public void searchSmallerThanTarget(Double target) {
         if(results.isEmpty()) throw new IllegalStateException("List is empty.");
