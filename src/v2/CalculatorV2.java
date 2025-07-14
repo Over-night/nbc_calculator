@@ -1,7 +1,5 @@
 package v2;
 
-import interfaces.Calculator;
-
 import java.util.ArrayList;
 
 public class CalculatorV2  {

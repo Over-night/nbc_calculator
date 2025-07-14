@@ -8,7 +8,6 @@ import v3.InputManagerV3;
 
 import java.util.ArrayList;
 
-
 // V3
 public class Main {
 
