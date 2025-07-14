@@ -1,11 +1,11 @@
-package model;
+package v2;
 
-public class InputtedModification {
+public class InputtedModificationV2 {
     public final double firstOperand;
     public final double secondOperand;
     public final char operator;
 
-    public InputtedModification(double firstOperand, double secondOperand, char operator) {
+    public InputtedModificationV2(double firstOperand, double secondOperand, char operator) {
         this.firstOperand = firstOperand;
         this.secondOperand = secondOperand;
         this.operator = operator;

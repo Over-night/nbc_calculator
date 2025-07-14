@@ -1,11 +1,8 @@
 package v2;
 
-import interfaces.InputManager;
-import model.InputtedModification;
-
 import java.util.Scanner;
 
-public class InputManagerV2 implements InputManager {
+public class InputManagerV2 {
     private final Scanner sc;
 
     public InputManagerV2() {
@@ -28,7 +25,7 @@ public class InputManagerV2 implements InputManager {
         }
     }
 
-    public InputtedModification inputModification() {
+    public InputtedModificationV2 inputModification() {
         double firstOperand = 0;
         double secondOperand = 0;
         char operator = ' ';
@@ -58,7 +55,7 @@ public class InputManagerV2 implements InputManager {
             }
         }
 
-        return new InputtedModification(firstOperand, secondOperand, operator);
+        return new InputtedModificationV2(firstOperand, secondOperand, operator);
     }
 
     public int inputMenu() {
