@@ -1,23 +1,22 @@
 package v2;
 
 import interfaces.Calculator;
-import utils.InputtedModification;
 
 import java.util.ArrayList;
 
-public class CalculatorV2 implements Calculator<Double>  {
+public class CalculatorV2  {
     private final ArrayList<Double> results;
 
     public CalculatorV2() {
         results = new ArrayList<>();
     }
 
-    public Double calculate(InputtedModification data) {
-        double result = switch (data.operator) {
-            case '+' -> data.firstOperand + data.secondOperand;
-            case '-' -> data.firstOperand - data.secondOperand;
-            case '*' -> data.firstOperand * data.secondOperand;
-            case '/' -> data.firstOperand / data.secondOperand;
+    public Double calculate(InputtedModificationV2 modification) {
+        double result = switch (modification.operator) {
+            case '+' -> modification.firstOperand + modification.secondOperand;
+            case '-' -> modification.firstOperand - modification.secondOperand;
+            case '*' -> modification.firstOperand * modification.secondOperand;
+            case '/' -> modification.firstOperand / modification.secondOperand;
             default -> throw new IllegalArgumentException("Error : Invalid data.");
         };
 

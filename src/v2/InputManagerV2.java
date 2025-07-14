@@ -1,11 +1,10 @@
 package v2;
 
 import interfaces.InputManager;
-import utils.InputtedModification;
 
 import java.util.Scanner;
 
-public class InputManagerV2 implements InputManager {
+public class InputManagerV2 {
     private final Scanner sc;
 
     public InputManagerV2() {
@@ -28,7 +27,7 @@ public class InputManagerV2 implements InputManager {
         }
     }
 
-    public InputtedModification inputModification() {
+    public InputtedModificationV2 inputModification() {
         double firstOperand = 0;
         double secondOperand = 0;
         char operator = ' ';
@@ -58,7 +57,7 @@ public class InputManagerV2 implements InputManager {
             }
         }
 
-        return new InputtedModification(firstOperand, secondOperand, operator);
+        return new InputtedModificationV2(firstOperand, secondOperand, operator);
     }
 
     public int inputMenu() {
@@ -67,9 +66,10 @@ public class InputManagerV2 implements InputManager {
         System.out.println("< Menu Manager >");
         System.out.println("1. Calculate");
         System.out.println("2. Show All Data");
+        System.out.println("3. Show First Data");
         System.out.println("3. Show Recent Data");
         System.out.println("4. Delete All Data");
-        System.out.println("5. Delete first Data");
+        System.out.println("5. Delete First Data");
         System.out.println("0. Exit");
 
         while (true) {
@@ -86,17 +86,25 @@ public class InputManagerV2 implements InputManager {
                 case "2. Show All Data":
                     return 2;
                 case "3":
-                case "Show Recent Data":
-                case "3. Show Recent Data":
+                case "Show First Data":
+                case "3. Show First Data":
                     return 3;
                 case "4":
-                case "Delete All Data":
-                case "4. Delete All Data":
+                case "Show Recent Data":
+                case "4. Show Recent Data":
                     return 4;
                 case "5":
-                case "Delete first Data":
-                case "5. Delete first Data":
+                case "Delete All Data":
+                case "5. Delete All Data":
                     return 5;
+                case "6":
+                case "Delete First Data":
+                case "6. Delete First Data":
+                    return 6;
+                case "7":
+                case "Delete Recent Data":
+                case "7. Delete Recent Data":
+                    return 7;
                 case "0":
                 case "Exit":
                 case "exit":
