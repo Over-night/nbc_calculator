@@ -1,7 +1,5 @@
 package v2;
 
-import interfaces.InputManager;
-
 import java.util.Scanner;
 
 public class InputManagerV2 {
@@ -66,10 +64,9 @@ public class InputManagerV2 {
         System.out.println("< Menu Manager >");
         System.out.println("1. Calculate");
         System.out.println("2. Show All Data");
-        System.out.println("3. Show First Data");
         System.out.println("3. Show Recent Data");
         System.out.println("4. Delete All Data");
-        System.out.println("5. Delete First Data");
+        System.out.println("5. Delete first Data");
         System.out.println("0. Exit");
 
         while (true) {
@@ -86,25 +83,17 @@ public class InputManagerV2 {
                 case "2. Show All Data":
                     return 2;
                 case "3":
-                case "Show First Data":
-                case "3. Show First Data":
+                case "Show Recent Data":
+                case "3. Show Recent Data":
                     return 3;
                 case "4":
-                case "Show Recent Data":
-                case "4. Show Recent Data":
+                case "Delete All Data":
+                case "4. Delete All Data":
                     return 4;
                 case "5":
-                case "Delete All Data":
-                case "5. Delete All Data":
+                case "Delete first Data":
+                case "5. Delete first Data":
                     return 5;
-                case "6":
-                case "Delete First Data":
-                case "6. Delete First Data":
-                    return 6;
-                case "7":
-                case "Delete Recent Data":
-                case "7. Delete Recent Data":
-                    return 7;
                 case "0":
                 case "Exit":
                 case "exit":
