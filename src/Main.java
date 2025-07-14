@@ -1,8 +1,8 @@
 import interfaces.Calculator;
 import interfaces.InputManager;
-import utils.InputtedModification;
-import utils.Menu;
-import utils.Result;
+import model.InputtedModification;
+import enums.Menu;
+import model.Result;
 import v3.CalculatorV3;
 import v3.InputManagerV3;
 
@@ -72,6 +72,22 @@ public class Main {
                         } catch (IllegalStateException e) {
                             System.out.printf("Error: %s\n\n", e.getMessage());
                         }
+                    break;
+                case SEARCH_BIGGER:
+                    try {
+                        Double target = inputManager.inputTarget();
+                        calculator.searchBiggerThanTarget(target);
+                    } catch (IllegalStateException e) {
+                        System.out.printf("Error: %s\n\n", e.getMessage());
+                    }
+                    break;
+                case SEARCH_SMALLER:
+                    try {
+                        Double target = inputManager.inputTarget();
+                        calculator.searchSmallerThanTarget(target);
+                    } catch (IllegalStateException e) {
+                        System.out.printf("Error: %s\n\n", e.getMessage());
+                    }
                     break;
                 case EXIT:
                         System.out.println("Program Terminated");

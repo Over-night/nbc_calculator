@@ -1,8 +1,8 @@
 package v3;
 
 import interfaces.Calculator;
-import utils.InputtedModification;
-import utils.Result;
+import model.InputtedModification;
+import model.Result;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         results = new ArrayList<>();
     }
 
+    @Override
     public Result calculate(InputtedModification<Double> modification) {
         double calculate_result = switch (modification.operator()) {
             case PLUS -> modification.firstOperand() + modification.secondOperand();
@@ -36,12 +37,14 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         return result;
     }
 
+    @Override
     public ArrayList<Result> getAllResults() {
         if (results.isEmpty()) throw new IllegalStateException("List is empty.");
 
         return results;
     }
 
+    @Override
     public Result getFirstResult() {
         try {
             return results.get(0);
@@ -50,6 +53,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         }
     }
 
+    @Override
     public Result getLastResult() {
         try {
             return results.get(results.size() - 1);
@@ -58,6 +62,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         }
     }
 
+    @Override
     public void deleteFirstResult() {
         try {
             results.remove(0);
@@ -68,6 +73,7 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         System.out.println("Deleted first result");
     }
 
+    @Override
     public void deleteLastResult() {
         try {
             results.remove(results.size() - 1);
@@ -78,10 +84,33 @@ public class CalculatorV3 implements Calculator<Result, Double>  {
         System.out.println("Deleted last result");
     }
 
+    @Override
     public void deleteAllResults() {
         if(results.isEmpty()) throw new IllegalStateException("List is already empty.");
 
         results.clear();
         System.out.println("Deleted all of results");
+    }
+
+    @Override
+    public void searchBiggerThanTarget(Double target) {
+        if(results.isEmpty()) throw new IllegalStateException("List is empty.");
+
+        System.out.printf(">>> Result that bigger than %f: \n", target);
+        results.stream()
+                .filter(x -> x.value() > target)
+                .forEach(System.out::println);
+        System.out.println();
+    }
+
+    @Override
+    public void searchSmallerThanTarget(Double target) {
+        if(results.isEmpty()) throw new IllegalStateException("List is empty.");
+
+        System.out.printf(">>> Result that smaller than %f: \n", target);
+        results.stream()
+                .filter(x -> x.value() < target)
+                .forEach(System.out::println);
+        System.out.println();
     }
 }

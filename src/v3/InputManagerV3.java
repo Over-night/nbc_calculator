@@ -1,10 +1,11 @@
 package v3;
 
 import interfaces.InputManager;
-import utils.InputtedModification;
-import utils.Menu;
-import utils.Operator;
+import model.InputtedModification;
+import enums.Menu;
+import enums.Operator;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputManagerV3 implements InputManager<Double> {
@@ -14,7 +15,7 @@ public class InputManagerV3 implements InputManager<Double> {
         sc = new Scanner(System.in);
     }
 
-    private Operator checkValid(double first, double second, String inputtedOperator) {
+    private Operator checkValid(double second, String inputtedOperator) {
         if (inputtedOperator.length() != 1) {
             throw new IllegalArgumentException("Invalid operator.");
         }
@@ -36,22 +37,23 @@ public class InputManagerV3 implements InputManager<Double> {
         return operator;
     }
 
+    @Override
     public InputtedModification<Double> inputModification() {
-        double firstOperand = 0;
-        double secondOperand = 0;
+        double firstOperand = 0f;
+        double secondOperand = 0f;
         Operator operator;
 
         while (true){
             try {
-                System.out.print("Enter first operand: ");
+                System.out.print(">>> Enter first operand: ");
                 firstOperand = sc.nextDouble();
-                System.out.print("Enter second operand: ");
+                System.out.print(">>> Enter second operand: ");
                 secondOperand = sc.nextDouble();
-                System.out.print("Enter operator: ");
+                System.out.print(">>> Enter operator: ");
                 String inputtedOperator = sc.next();
 
                 try {
-                    operator = checkValid(firstOperand, secondOperand, inputtedOperator);
+                    operator = checkValid(secondOperand, inputtedOperator);
                 }
                 catch (Exception e) {
                     System.out.println("Error: " + e.getMessage());
@@ -59,8 +61,8 @@ public class InputManagerV3 implements InputManager<Double> {
                 }
 
                 break;
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Invalid input value (" + e.getMessage() + ")");
                 sc.nextLine();
             }
         }
@@ -68,8 +70,26 @@ public class InputManagerV3 implements InputManager<Double> {
         return new InputtedModification<Double>(firstOperand, secondOperand, operator);
     }
 
+    @Override
+    public Double inputTarget() {
+        Double target = null;
+
+        while (true){
+            try {
+                System.out.print(">>> Enter value to search: ");
+                target = sc.nextDouble();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Error: " + e.getMessage());
+                sc.nextLine();
+            }
+        }
+
+        return target;
+    }
+
     public Menu inputMenu() {
-        String inputtedData;
+        String command;
 
         System.out.println("< Menu Manager >");
         System.out.println("1. Calculate");
@@ -79,13 +99,15 @@ public class InputManagerV3 implements InputManager<Double> {
         System.out.println("5. Delete All Data");
         System.out.println("6. Delete First Data");
         System.out.println("7. Delete Recent Data");
+        System.out.println("8. Search that bigger than inputted value");
+        System.out.println("9. Search that smaller than inputted value");
         System.out.println("0. Exit");
 
         while (true) {
             System.out.print("Select: ");
-            inputtedData = sc.next();
+            command = sc.next();
 
-            switch (inputtedData) {
+            switch (command) {
                 case "1":
                 case "Calculate":
                 case "1. Calculate":
@@ -114,6 +136,14 @@ public class InputManagerV3 implements InputManager<Double> {
                 case "Delete Recent Data":
                 case "7. Delete Recent Data":
                     return Menu.DELETE_LAST;
+                case "8":
+                case "Search that bigger than inputted value":
+                case "8. Search that bigger than inputted value":
+                    return Menu.SEARCH_BIGGER;
+                case "9":
+                case "Search that smaller than inputted value":
+                case "9. Search that smaller than inputted value":
+                    return Menu.SEARCH_SMALLER;
                 case "0":
                 case "Exit":
                 case "exit":

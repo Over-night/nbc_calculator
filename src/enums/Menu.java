@@ -1,4 +1,4 @@
-package utils;
+package enums;
 
 public enum Menu {
     CALCULATE,
@@ -8,5 +8,7 @@ public enum Menu {
     DELETE_ALL,
     DELETE_FIRST,
     DELETE_LAST,
+    SEARCH_BIGGER,
+    SEARCH_SMALLER,
     EXIT
 }

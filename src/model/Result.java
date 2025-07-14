@@ -1,4 +1,4 @@
-package utils;
+package model;
 
 public record Result(String modification, double value) {
     @Override

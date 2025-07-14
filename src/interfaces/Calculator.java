@@ -1,6 +1,6 @@
 package interfaces;
 
-import utils.InputtedModification;
+import model.InputtedModification;
 
 import java.util.ArrayList;
 
@@ -12,4 +12,6 @@ public interface Calculator<R,T> {
     void deleteFirstResult();
     void deleteLastResult();
     void deleteAllResults();
+    void searchBiggerThanTarget(T target);
+    void searchSmallerThanTarget(T target);
 }
