@@ -1,6 +1,6 @@
 package interfaces;
 
-import utils.InputtedModification;
+import model.InputtedModification;
 
 public interface InputManager {
     int inputMenu();

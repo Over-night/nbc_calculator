@@ -1,6 +1,6 @@
 import interfaces.Calculator;
 import interfaces.InputManager;
-import utils.InputtedModification;
+import model.InputtedModification;
 import v2.CalculatorV2;
 import v2.InputManagerV2;
 

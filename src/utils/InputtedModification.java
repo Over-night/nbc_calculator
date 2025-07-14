@@ -1,4 +1,4 @@
-package utils;
+package model;
 
 public class InputtedModification {
     public final double firstOperand;

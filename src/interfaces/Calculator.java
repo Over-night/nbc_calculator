@@ -1,6 +1,6 @@
 package interfaces;
 
-import utils.InputtedModification;
+import model.InputtedModification;
 
 import java.util.ArrayList;
 

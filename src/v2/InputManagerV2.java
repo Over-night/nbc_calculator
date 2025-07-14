@@ -1,7 +1,7 @@
 package v2;
 
 import interfaces.InputManager;
-import utils.InputtedModification;
+import model.InputtedModification;
 
 import java.util.Scanner;
 
