@@ -2,18 +2,19 @@ package v3;
 
 import interfaces.Calculator;
 import utils.InputtedModification;
+import utils.Result;
 
 import java.util.ArrayList;
 
-public class CalculatorV3 implements Calculator<Double>  {
-    private final ArrayList<Double> results;
+public class CalculatorV3 implements Calculator<Result, Double>  {
+    private final ArrayList<Result> results;
 
     public CalculatorV3() {
         results = new ArrayList<>();
     }
 
-    public Double calculate(InputtedModification<Double> modification) {
-        double result = switch (modification.operator()) {
+    public Result calculate(InputtedModification<Double> modification) {
+        double calculate_result = switch (modification.operator()) {
             case PLUS -> modification.firstOperand() + modification.secondOperand();
             case MINUS -> modification.firstOperand() - modification.secondOperand();
             case MULTIPLY -> modification.firstOperand() * modification.secondOperand();
@@ -21,18 +22,27 @@ public class CalculatorV3 implements Calculator<Double>  {
             default -> throw new IllegalArgumentException("Error : Invalid modification.");
         };
 
+        Result result = new Result(
+                String.format("%f %c %f = %f",
+                        modification.firstOperand(),
+                        modification.operator().getFlag(),
+                        modification.secondOperand(),
+                        calculate_result),
+                calculate_result
+        );
+
         results.add(result);
 
         return result;
     }
 
-    public ArrayList<Double> getAllResults() {
+    public ArrayList<Result> getAllResults() {
         if (results.isEmpty()) throw new IllegalStateException("List is empty.");
 
         return results;
     }
 
-    public Double getFirstResult() {
+    public Result getFirstResult() {
         try {
             return results.get(0);
         } catch (IllegalStateException e) {
@@ -40,7 +50,7 @@ public class CalculatorV3 implements Calculator<Double>  {
         }
     }
 
-    public Double getLastResult() {
+    public Result getLastResult() {
         try {
             return results.get(results.size() - 1);
         } catch (IllegalStateException e) {

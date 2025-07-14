@@ -4,11 +4,11 @@ import utils.InputtedModification;
 
 import java.util.ArrayList;
 
-public interface Calculator<T> {
-    T calculate(InputtedModification<T> modification);
-    T getFirstResult();
-    T getLastResult();
-    ArrayList<T> getAllResults();
+public interface Calculator<R,T> {
+    R calculate(InputtedModification<T> modification);
+    R getFirstResult();
+    R getLastResult();
+    ArrayList<R> getAllResults();
     void deleteFirstResult();
     void deleteLastResult();
     void deleteAllResults();

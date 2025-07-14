@@ -2,8 +2,11 @@ import interfaces.Calculator;
 import interfaces.InputManager;
 import utils.InputtedModification;
 import utils.Menu;
+import utils.Result;
 import v3.CalculatorV3;
 import v3.InputManagerV3;
+
+import java.util.ArrayList;
 
 
 // V3
@@ -11,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         InputManager<Double> inputManager = new InputManagerV3();
-        Calculator<Double> calculator = new CalculatorV3();
+        Calculator<Result, Double> calculator = new CalculatorV3();
 
         while (true) {
             Menu menu = inputManager.inputMenu();
@@ -19,15 +22,14 @@ public class Main {
             switch (menu) {
                 case CALCULATE:
                         InputtedModification<Double> modification = inputManager.inputModification();
-                        System.out.printf("%f %c %f = %f\n\n",
-                                modification.firstOperand(),
-                                modification.operator().getFlag(),
-                                modification.secondOperand(),
-                                calculator.calculate(modification));
+                        System.out.println(">>> Result : " + calculator.calculate(modification) + "\n");
                         break;
                 case SHOW_ALL:
                         try {
-                            System.out.println("All result: " + calculator.getAllResults());
+                            ArrayList<Result> results = calculator.getAllResults();
+                            System.out.println(">>> All result");
+                            for (Result result : results)
+                                System.out.println(result.toString());
                             System.out.println();
                         } catch(IllegalStateException e) {
                             System.out.printf("Error: %s\n\n", e.getMessage());
@@ -35,14 +37,14 @@ public class Main {
                         break;
                 case SHOW_FIRST:
                         try {
-                            System.out.printf("First result: %f\n\n", calculator.getFirstResult());
+                            System.out.println(">>> First result: " + calculator.getFirstResult() + "\n");
                         } catch (IllegalStateException e) {
                             System.out.printf("Error: %s\n\n", e.getMessage());
                         }
                     break;
                 case SHOW_LAST:
                         try {
-                            System.out.printf("Recent result: %f\n\n", calculator.getLastResult());
+                            System.out.println(">>> Recent result: " + calculator.getLastResult() + "\n");
                         } catch (IllegalStateException e) {
                             System.out.printf("Error: %s\n\n", e.getMessage());
                         }
@@ -50,7 +52,7 @@ public class Main {
                 case DELETE_ALL:
                         try {
                             calculator.deleteAllResults();
-                            System.out.println("All data is deleted\n");
+                            System.out.println(">>> Delete All : All data is deleted\n");
                         } catch (IllegalStateException e) {
                             System.out.printf("Error: %s\n\n", e.getMessage());
                         }
@@ -58,7 +60,7 @@ public class Main {
                 case DELETE_FIRST:
                         try {
                             calculator.deleteFirstResult();
-                            System.out.println("First data is deleted\n");
+                            System.out.println(">>> Delete First : First data is deleted\n");
                         } catch (IllegalStateException e) {
                             System.out.printf("Error: %s\n\n", e.getMessage());
                         }
@@ -66,7 +68,7 @@ public class Main {
                 case DELETE_LAST:
                         try {
                             calculator.deleteLastResult();
-                            System.out.println("Recent data is deleted\n");
+                            System.out.println(">>> Delete Recent : Recent data is deleted\n");
                         } catch (IllegalStateException e) {
                             System.out.printf("Error: %s\n\n", e.getMessage());
                         }
